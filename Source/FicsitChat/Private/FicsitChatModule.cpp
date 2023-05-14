@@ -23,8 +23,8 @@ void FFicsitChatModule::ShutdownModule() {
 void FFicsitChatModule::RegisterHooks() {
 #if !WITH_EDITOR
 	// TODO: Register chat hook
-	FGChatManager *fgChatManager = GetMutableDefault<FGChatManager>();
-	SUBSCRIBE_METHOD_VIRTUAL_AFTER(FGChatManager::Multicast_BroadcastChatMessage, fgChatManager, [](FGChatManager *self, const FChatMessageStruct &newMessage) {
+	AFGChatManager *afgChatManager = GetMutableDefault<AFGChatManager>();
+	SUBSCRIBE_METHOD_VIRTUAL_AFTER(AFGChatManager::Multicast_BroadcastChatMessage, afgChatManager, [](AFGChatManager *self, const FChatMessageStruct &newMessage) {
 		// do some nice stuff there
 		UE_LOG(LogFicsitChat, Verbose, TEXT("Chat message sent to all clients"));
 	});
