@@ -3,7 +3,7 @@
 	"Version": 1,
 	"VersionName": "1.0.0",
 	"SemVersion": "1.0.0",
-	"FriendlyName": "Discy",
+	"FriendlyName": "Ficsit.Chat",
 	"Description": "Satisfactory to Discord chat bridge.",
 	"Category": "Modding",
 	"CreatedBy": "Steveplays28",
@@ -17,7 +17,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "Discy",
+			"Name": "FicsitChat",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
