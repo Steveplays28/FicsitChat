@@ -16,5 +16,6 @@ public class DPPLibrary : ModuleRules
 
 		PublicAdditionalLibraries.Add(Path.Combine(libraryFolder, "dpp.lib"));
 		RuntimeDependencies.Add("$(TargetOutputDir)/dpp.dll", Path.Combine(binaryFolder, "dpp.dll"));
+		PrivateIncludePaths.Add(binaryFolder);
 	}
 }
