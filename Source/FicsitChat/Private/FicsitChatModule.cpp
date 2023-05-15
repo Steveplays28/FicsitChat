@@ -1,5 +1,6 @@
 #include "FicsitChatModule.h"
 #include "FGChatManager.h"
+#include "FGPlayerState.h"
 #include "Patching/NativeHookManager.h"
 
 #define LOCTEXT_NAMESPACE "FFicsitChatModule"
@@ -22,11 +23,11 @@ void FFicsitChatModule::ShutdownModule() {
 
 void FFicsitChatModule::RegisterHooks() {
 #if !WITH_EDITOR
-	// TODO: Register chat hook
 	AFGChatManager *afgChatManager = GetMutableDefault<AFGChatManager>();
 	SUBSCRIBE_METHOD_VIRTUAL_AFTER(AFGChatManager::Multicast_BroadcastChatMessage, afgChatManager, [](AFGChatManager *self, const FChatMessageStruct &newMessage) {
 		// do some nice stuff there
-		UE_LOG(LogFicsitChat, Verbose, TEXT("Chat message sent to all clients"));
+		// FString logMessage = FString::Format(*"Chat message by {0} sent to all clients: {1}", {newMessage.Sender->GetUserName(), newMessage.MessageString});
+		UE_LOG(LogFicsitChat, Verbose, TEXT("Chat message by %s sent to all clients: %s"), *newMessage.Sender->GetUserName(), *newMessage.MessageString);
 	});
 #endif
 }
