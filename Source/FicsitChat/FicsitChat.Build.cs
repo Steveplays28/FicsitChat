@@ -35,6 +35,6 @@ public class FicsitChat : ModuleRules
 		{
 			PublicDependencyModuleNames.AddRange(new string[] { "OnlineBlueprintSupport", "AnimGraph" });
 		}
-		PublicDependencyModuleNames.AddRange(new string[] { "FactoryGame", "SML" });
+		PublicDependencyModuleNames.AddRange(new string[] { "FactoryGame", "SML", "DPPLibrary" });
 	}
 }

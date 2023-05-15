@@ -1,7 +1,13 @@
 #include "FicsitChatModule.h"
+#include "Configuration/ConfigManager.h"
 #include "FGChatManager.h"
 #include "FGPlayerState.h"
+#include "FicsitChat_ConfigStruct.h"
 #include "Patching/NativeHookManager.h"
+
+THIRD_PARTY_INCLUDES_START
+#include "dpp/dpp.h"
+THIRD_PARTY_INCLUDES_END
 
 #define LOCTEXT_NAMESPACE "FFicsitChatModule"
 
@@ -10,7 +16,44 @@ DEFINE_LOG_CATEGORY(LogFicsitChat);
 void FFicsitChatModule::StartupModule() {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 
+#if !WITH_EDITOR
+	// Get mod config
+	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
+
+	UE_LOG(LogFicsitChat, Verbose, TEXT("Bot token: %s"), *config.BotToken);
+#endif
+
 	// TODO: Start Discord bot
+	// dpp::cluster bot(config.BotToken);
+
+	// bot.on_slashcommand([](auto event) {
+	// 	if (event.command.get_command_name() == "ping") {
+	// 		event.reply("Pong!");
+	// 	}
+	// });
+
+	// bot.on_ready([&bot](auto event) {
+	// 	if (dpp::run_once<struct register_bot_commands>()) {
+	// 		bot.global_command_create(dpp::slashcommand("ping", "Ping pong!", bot.me.id));
+	// 	}
+	// });
+
+	// bot.start(dpp::st_wait);
+	// dpp::cluster bot(config.BotToken);
+
+	// bot.on_slashcommand([](auto event) {
+	// 	if (event.command.get_command_name() == "ping") {
+	// 		event.reply("Pong!");
+	// 	}
+	// });
+
+	// bot.on_ready([&bot](auto event) {
+	// 	if (dpp::run_once<struct register_bot_commands>()) {
+	// 		bot.global_command_create(dpp::slashcommand("ping", "Ping pong!", bot.me.id));
+	// 	}
+	// });
+
+	// bot.start(dpp::st_wait);
 
 	// Register hooks
 	RegisterHooks();
