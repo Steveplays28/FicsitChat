@@ -5,12 +5,11 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(LogFicsitChat, Verbose, All);
 
-class FFicsitChatModule : public FDefaultGameModuleImpl {
+class FFicsitChatModule : public FDefaultModuleImpl {
   public:
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
-	virtual bool IsGameModule() const override { return true; }
 
 	void RegisterHooks();
 };
