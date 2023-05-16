@@ -46,7 +46,6 @@ SourceArt/**/*.png
 SourceArt/**/*.tga
 
 # Binary Files
-Binaries/*
 Plugins/*/Binaries/*
 
 # Builds
@@ -86,3 +85,21 @@ DerivedDataCache/*
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# DPP DLLs
+!Binaries/Win64/dpp.dll
+!Binaries/Win64/libcrypto-1_1-x64.dll
+!Binaries/Win64/libsodium.dll
+!Binaries/Win64/libssl-1_1-x64.dll
+!Binaries/Win64/opus.dll
+!Binaries/Win64/zlib1.dll
+
+!ThirdParty/Binaries/Win64/dpp.dll
+!ThirdParty/Binaries/Win64/libcrypto-1_1-x64.dll
+!ThirdParty/Binaries/Win64/libsodium.dll
+!ThirdParty/Binaries/Win64/libssl-1_1-x64.dll
+!ThirdParty/Binaries/Win64/opus.dll
+!ThirdParty/Binaries/Win64/zlib1.dll
+
+*.pdb
+*.modules

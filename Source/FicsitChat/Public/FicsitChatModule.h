@@ -5,7 +5,7 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(LogFicsitChat, Verbose, All);
 
-class FFicsitChatModule : public FDefaultModuleImpl {
+class FFicsitChatModule : public FDefaultGameModuleImpl {
   public:
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
