@@ -2,6 +2,7 @@
 #include "FGChatManager.h"
 #include "FGPlayerState.h"
 #include "Patching/NativeHookManager.h"
+#include "FicsitChatBotMessageSendRunnable.h"
 
 #define LOCTEXT_NAMESPACE "FFicsitChatModule"
 
@@ -26,6 +27,8 @@ void FFicsitChatModule::RegisterHooks() {
 		// do some nice stuff there
 		// FString logMessage = FString::Format(*"Chat message by {0} sent to all clients: {1}", {newMessage.Sender->GetUserName(), newMessage.MessageString});
 		UE_LOG(LogFicsitChat, Verbose, TEXT("Chat message by %s sent to all clients: %s"), *newMessage.Sender->GetUserName(), *newMessage.MessageString);
+
+		FFicsitChatBotMessageSendRunnable *messageSendRunnable = new FFicsitChatBotMessageSendRunnable(TCHAR_TO_ANSI(*newMessage.MessageString));
 	});
 #endif
 }
