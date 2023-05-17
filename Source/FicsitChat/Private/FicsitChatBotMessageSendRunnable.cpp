@@ -7,8 +7,9 @@ THIRD_PARTY_INCLUDES_START
 #include "dpp/dpp.h"
 THIRD_PARTY_INCLUDES_END
 
-FFicsitChatBotMessageSendRunnable::FFicsitChatBotMessageSendRunnable(char *message) {
+FFicsitChatBotMessageSendRunnable::FFicsitChatBotMessageSendRunnable(char *message, char *userName) {
 	Message = message;
+	UserName = userName;
 	Thread = FRunnableThread::Create(this, TEXT("FICSIT.chat Discord bot thread"));
 }
 
@@ -29,18 +30,10 @@ uint32 FFicsitChatBotMessageSendRunnable::Run() {
 		bBotStarted = true;
 
 		dpp::embed embed = dpp::embed()
-							   .set_color(dpp::colors::sti_blue)
-							   .set_title("Some name")
-							   .set_url("https://dpp.dev/")
-							   .set_author("Some name", "https://dpp.dev/", "https://dpp.dev/DPP-Logo.png")
-							   .set_description("Some description here")
-							   .set_thumbnail("https://dpp.dev/DPP-Logo.png")
-							   .add_field("Regular field title", "Some value here")
-							   .add_field("Inline field title", "Some value here", true)
-							   .add_field("Inline field title", "Some value here", true)
-							   .set_image("https://dpp.dev/DPP-Logo.png")
-							   .set_footer(dpp::embed_footer().set_text("Some footer text here").set_icon("https://dpp.dev/DPP-Logo.png"))
-							   .set_timestamp(time(0));
+							   .set_color(dpp::colors::orange)
+							   .set_title(UserName)
+							   .set_description(Message)
+							   .set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
 
 		bot.message_create(dpp::message(1107400352384426104, embed));
 	}
