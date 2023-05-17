@@ -21,6 +21,8 @@ class FBUIExampleRunnable : public FRunnable {
 
 	// FBUIOnCompleteSignature OnCompleteDelegate;
 
+	bool bBotStarted = false;
+
   protected:
 	FRunnableThread *Thread = nullptr;
 
