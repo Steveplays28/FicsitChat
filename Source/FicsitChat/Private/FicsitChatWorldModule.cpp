@@ -1,6 +1,7 @@
 #include "FicsitChatWorldModule.h"
-#include "Configuration/ConfigManager.h"
 #include "BUIExampleRunnable.h"
+#include "Configuration/ConfigManager.h"
+
 
 // THIRD_PARTY_INCLUDES_START
 // #include "dpp/dpp.h"
@@ -20,5 +21,5 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	UE_LOG(LogFicsitChat, Verbose, TEXT("Bot token: %s"), *config.BotToken);
 
 	// TODO: Start Discord bot
-	TSharedPtr<FBUIExampleRunnable> SomeRunnable = MakeShared<FBUIExampleRunnable>(10);
+	FBUIExampleRunnable *SomeRunnable = new FBUIExampleRunnable(10);
 }
