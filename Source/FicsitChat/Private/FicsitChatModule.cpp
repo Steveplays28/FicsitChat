@@ -1,8 +1,8 @@
 #include "FicsitChatModule.h"
 #include "FGChatManager.h"
 #include "FGPlayerState.h"
-#include "Patching/NativeHookManager.h"
 #include "FicsitChatBotMessageSendRunnable.h"
+#include "Patching/NativeHookManager.h"
 
 #define LOCTEXT_NAMESPACE "FFicsitChatModule"
 

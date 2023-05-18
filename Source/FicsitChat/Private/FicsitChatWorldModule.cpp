@@ -21,5 +21,5 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	UE_LOG(LogFicsitChat, Verbose, TEXT("Bot token: %s"), *config.BotToken);
 
 	// TODO: Start Discord bot
-	FBUIExampleRunnable *SomeRunnable = new FBUIExampleRunnable(10);
+	FBUIExampleRunnable *SomeRunnable = new FBUIExampleRunnable();
 }
