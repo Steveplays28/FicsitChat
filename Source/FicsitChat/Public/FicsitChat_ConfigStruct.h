@@ -12,6 +12,12 @@ public:
     UPROPERTY(BlueprintReadWrite)
     FString BotToken;
 
+    UPROPERTY(BlueprintReadWrite)
+    bool HasJoinedMessage;
+
+    UPROPERTY(BlueprintReadWrite)
+    bool HasLeftMessage;
+
     /* Retrieves active configuration value and returns object of this struct containing it */
     static FFicsitChat_ConfigStruct GetActiveConfig() {
         FFicsitChat_ConfigStruct ConfigStruct{};

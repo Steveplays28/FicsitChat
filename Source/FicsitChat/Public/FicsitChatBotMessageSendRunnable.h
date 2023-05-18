@@ -10,7 +10,7 @@
 class FFicsitChatBotMessageSendRunnable : public FRunnable {
   public:
 	// Custom constructor for setting up our thread with its target
-	FFicsitChatBotMessageSendRunnable(char *message, char *userName);
+	FFicsitChatBotMessageSendRunnable(std::string message, std::string userName);
 	virtual ~FFicsitChatBotMessageSendRunnable();
 
 	// FRunnable functions
@@ -21,8 +21,8 @@ class FFicsitChatBotMessageSendRunnable : public FRunnable {
 
 	// FBUIOnCompleteSignature OnCompleteDelegate;
 
-	char *Message;
-	char *UserName;
+	std::string Message;
+	std::string UserName;
 	bool bBotStarted = false;
 
   protected:

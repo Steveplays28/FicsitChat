@@ -7,7 +7,7 @@ THIRD_PARTY_INCLUDES_START
 #include "dpp/dpp.h"
 THIRD_PARTY_INCLUDES_END
 
-FFicsitChatBotMessageSendRunnable::FFicsitChatBotMessageSendRunnable(char *message, char *userName) {
+FFicsitChatBotMessageSendRunnable::FFicsitChatBotMessageSendRunnable(std::string message, std::string userName) {
 	Message = message;
 	UserName = userName;
 	Thread = FRunnableThread::Create(this, TEXT("FICSIT.chat Discord bot thread"));
@@ -26,6 +26,16 @@ uint32 FFicsitChatBotMessageSendRunnable::Run() {
 	if (!bBotStarted) {
 		FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
 		dpp::cluster bot(TCHAR_TO_ANSI(*config.BotToken));
+
+		if (Message == std::string("has joined the game!") && !config.HasJoinedMessage) {
+			bBotStarted = true;
+			return 0;
+		}
+
+		if (Message == std::string("has left the game!") && !config.HasLeftMessage) {
+			bBotStarted = true;
+			return 0;
+		}
 
 		bBotStarted = true;
 
