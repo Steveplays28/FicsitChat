@@ -9,6 +9,19 @@ UFicsitChatWorldModule::UFicsitChatWorldModule() {
 
 // Runs on game world load
 void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
+	if (Phase == ELifecyclePhase::POST_INITIALIZATION) {
+		FChatMessageStruct chatMessageStruct{};
+		chatMessageStruct.MessageString = TEXT("Hello from FICSIT.chat!");
+		chatMessageStruct.MessageType = EFGChatMessageType::CMT_PlayerMessage;
+		chatMessageStruct.ServerTimeStamp = GetWorld()->TimeSeconds;
+		chatMessageStruct.CachedPlayerName = TEXT("Discord nickname here");
+
+		AFGChatManager *chatManager = AFGChatManager::Get(GetWorld());
+		chatManager->AddChatMessageToReceived(chatMessageStruct);
+
+		UE_LOG(LogFicsitChat, Verbose, TEXT("Sent chat message: %s"), TEXT("Hello from FICSIT.chat!"));
+	}
+
 	if (Phase != ELifecyclePhase::INITIALIZATION)
 		return;
 
