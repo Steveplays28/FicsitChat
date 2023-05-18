@@ -4,6 +4,22 @@
 #include "Engine/Engine.h"
 #include "FicsitChat_ConfigStruct.generated.h"
 
+struct FFicsitChat_ConfigStruct_ChatMessageColor;
+
+USTRUCT(BlueprintType)
+struct FFicsitChat_ConfigStruct_ChatMessageColor {
+    GENERATED_BODY()
+public:
+    UPROPERTY(BlueprintReadWrite)
+    float Red;
+
+    UPROPERTY(BlueprintReadWrite)
+    float Green;
+
+    UPROPERTY(BlueprintReadWrite)
+    float Blue;
+};
+
 /* Struct generated from Mod Configuration Asset '/FicsitChat/FicsitChat_Config' */
 USTRUCT(BlueprintType)
 struct FFicsitChat_ConfigStruct {
@@ -17,6 +33,12 @@ public:
 
     UPROPERTY(BlueprintReadWrite)
     bool HasLeftMessage;
+
+    UPROPERTY(BlueprintReadWrite)
+    FString ChannelId;
+
+    UPROPERTY(BlueprintReadWrite)
+    FFicsitChat_ConfigStruct_ChatMessageColor ChatMessageColor;
 
     /* Retrieves active configuration value and returns object of this struct containing it */
     static FFicsitChat_ConfigStruct GetActiveConfig() {

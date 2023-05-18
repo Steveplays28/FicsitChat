@@ -46,7 +46,7 @@ void FFicsitChatModule::RegisterHooks() {
 			dpp::embed embed =
 				dpp::embed().set_color(dpp::colors::orange).set_title(userName).set_description(message).set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
 
-			worldModule->bot->message_create(dpp::message(1107400352384426104, embed));
+			worldModule->bot->message_create(dpp::message(FCString::Atoi(*config.ChannelId), embed));
 		});
 	});
 #endif

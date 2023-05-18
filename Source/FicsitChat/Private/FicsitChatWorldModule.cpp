@@ -31,6 +31,7 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 			chatMessageStruct.MessageType = EFGChatMessageType::CMT_PlayerMessage;
 			chatMessageStruct.ServerTimeStamp = GetWorld()->TimeSeconds;
 			chatMessageStruct.CachedPlayerName = messageAuthor;
+			chatMessageStruct.CachedColor = FLinearColor(config.ChatMessageColor.Red, config.ChatMessageColor.Green, config.ChatMessageColor.Blue);
 
 			AFGChatManager *chatManager = AFGChatManager::Get(GetWorld());
 			chatManager->AddChatMessageToReceived(chatMessageStruct);
