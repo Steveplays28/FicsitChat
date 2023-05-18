@@ -1,10 +1,5 @@
 #include "FicsitChatWorldModule.h"
-#include "BUIExampleRunnable.h"
 #include "Configuration/ConfigManager.h"
-
-// THIRD_PARTY_INCLUDES_START
-// #include "dpp/dpp.h"
-// THIRD_PARTY_INCLUDES_END
 
 UFicsitChatWorldModule::UFicsitChatWorldModule() {
 #if !WITH_EDITOR
@@ -22,6 +17,21 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 
 	UE_LOG(LogFicsitChat, Verbose, TEXT("Bot token: %s"), *config.BotToken);
 
-	// TODO: Start Discord bot
-	FBUIExampleRunnable *SomeRunnable = new FBUIExampleRunnable();
+	bot = MakeShared<dpp::cluster>(TCHAR_TO_ANSI(*config.BotToken));
+
+	AsyncThread([=]() {
+		bot->on_slashcommand([](auto event) {
+			if (event.command.get_command_name() == "ping") {
+				event.reply("Pong!");
+			}
+		});
+
+		bot->on_ready([&](auto event) {
+			if (dpp::run_once<struct register_bot_commands>()) {
+				bot->global_command_create(dpp::slashcommand("ping", "Ping pong!", bot->me.id));
+			}
+		});
+
+		bot->start(false);
+	});
 }
