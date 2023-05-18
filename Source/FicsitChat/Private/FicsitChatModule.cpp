@@ -31,20 +31,20 @@ void FFicsitChatModule::RegisterHooks() {
 		FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
 		UFicsitChatWorldModule *worldModule = (UFicsitChatWorldModule *)self->GetWorld()->GetSubsystem<UWorldModuleManager>()->FindModule(TEXT("FicsitChat"));
 
+		std::string userName = TCHAR_TO_UTF8(*newMessage.Sender->GetUserName());
+		std::string message = TCHAR_TO_UTF8(*newMessage.MessageString);
+
 		AsyncThread([=]() {
-			if (TCHAR_TO_UTF8(*newMessage.MessageString) == std::string("has joined the game!") && !config.HasJoinedMessage) {
+			if (message == std::string("has joined the game!") && !config.HasJoinedMessage) {
 				return;
 			}
 
-			if (TCHAR_TO_UTF8(*newMessage.MessageString) == std::string("has left the game!") && !config.HasLeftMessage) {
+			if (message == std::string("has left the game!") && !config.HasLeftMessage) {
 				return;
 			}
 
-			dpp::embed embed = dpp::embed()
-								   .set_color(dpp::colors::orange)
-								   .set_title(TCHAR_TO_UTF8(*newMessage.Sender->GetUserName()))
-								   .set_description(TCHAR_TO_UTF8(*newMessage.MessageString))
-								   .set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
+			dpp::embed embed =
+				dpp::embed().set_color(dpp::colors::orange).set_title(userName).set_description(message).set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
 
 			worldModule->bot->message_create(dpp::message(1107400352384426104, embed));
 		});
