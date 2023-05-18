@@ -2,7 +2,6 @@
 #include "BUIExampleRunnable.h"
 #include "Configuration/ConfigManager.h"
 
-
 // THIRD_PARTY_INCLUDES_START
 // #include "dpp/dpp.h"
 // THIRD_PARTY_INCLUDES_END
@@ -15,6 +14,9 @@ UFicsitChatWorldModule::UFicsitChatWorldModule() {
 
 // Runs on game world load
 void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
+	if (Phase != ELifecyclePhase::INITIALIZATION)
+		return;
+
 	// Get mod config
 	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
 
