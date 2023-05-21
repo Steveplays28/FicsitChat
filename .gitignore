@@ -101,5 +101,7 @@ DerivedDataCache/*
 !ThirdParty/Binaries/Win64/opus.dll
 !ThirdParty/Binaries/Win64/zlib1.dll
 
+!Source/ThirdParty/DPPLibrary/Win64/dpp.lib
+
 *.pdb
 *.modules
