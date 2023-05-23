@@ -5,6 +5,7 @@
 #include "Module/GameInstanceModule.h"
 #include "Module/WorldModuleManager.h"
 #include "Patching/NativeHookManager.h"
+#include "Reflection/BlueprintReflectionLibrary.h"
 
 #define LOCTEXT_NAMESPACE "FFicsitChatModule"
 
@@ -33,21 +34,19 @@ void FFicsitChatModule::RegisterHooks() {
 
 		std::string userName = TCHAR_TO_UTF8(*newMessage.Sender->GetUserName());
 		std::string message = TCHAR_TO_UTF8(*newMessage.MessageString);
+		if (message == std::string("has joined the game!") && !config.HasJoinedMessage) {
+			return;
+		}
+		if (message == std::string("has left the game!") && !config.HasLeftMessage) {
+			return;
+		}
 
-		AsyncThread([=]() {
-			if (message == std::string("has joined the game!") && !config.HasJoinedMessage) {
-				return;
-			}
+		UE_LOG(LogFicsitChat, Verbose, TEXT("Channel ID: %s"), *config.ChannelId);
 
-			if (message == std::string("has left the game!") && !config.HasLeftMessage) {
-				return;
-			}
+		dpp::embed embed =
+			dpp::embed().set_color(dpp::colors::orange).set_title(userName).set_description(message).set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
 
-			dpp::embed embed =
-				dpp::embed().set_color(dpp::colors::orange).set_title(userName).set_description(message).set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
-
-			worldModule->bot->message_create(dpp::message(FCString::Atoi(*config.ChannelId), embed));
-		});
+		worldModule->bot->message_create(dpp::message(dpp::snowflake::snowflake(TCHAR_TO_UTF8(*config.ChannelId)), embed));
 	});
 #endif
 }

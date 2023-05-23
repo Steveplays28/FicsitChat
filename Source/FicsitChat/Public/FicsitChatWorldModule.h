@@ -23,5 +23,7 @@ class UFicsitChatWorldModule : public UGameWorldModule {
 	UFicsitChatWorldModule();
 	virtual void DispatchLifecycleEvent(ELifecyclePhase Phase) override;
 
+	void SendMessageToGame(FString messageContent, FString messageAuthor);
+
 	TSharedPtr<dpp::cluster> bot;
 };
