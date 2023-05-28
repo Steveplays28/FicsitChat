@@ -26,4 +26,6 @@ class UFicsitChatWorldModule : public UGameWorldModule {
 	void SendMessageToGame(FString messageContent, FString messageAuthor);
 
 	TSharedPtr<dpp::cluster> bot;
+	FString botUsername;
+	uint16_t botDiscriminator;
 };

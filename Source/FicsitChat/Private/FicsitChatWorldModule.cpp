@@ -20,9 +20,22 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	// Start Discord bot
 	bot = MakeShared<dpp::cluster>(TCHAR_TO_UTF8(*config.BotToken), dpp::i_default_intents | dpp::i_message_content);
 
+	bot->on_ready([&](auto event) {
+		if (dpp::run_once<struct register_bot_commands>()) {
+			bot->global_command_create(dpp::slashcommand("ping", "Ping pong!", bot->me.id));
+		}
+
+		botUsername = bot->me.username.c_str();
+		botDiscriminator = bot->me.discriminator;
+	});
+
 	bot->on_message_create([&](const dpp::message_create_t &event) {
 		FString messageContent = event.msg.content.c_str();
 		FString messageAuthor = event.msg.author.username.c_str();
+		uint16_t messageAuthorDiscriminator = event.msg.author.discriminator;
+
+		if (messageAuthor == botUsername && messageAuthorDiscriminator == botDiscriminator)
+			return;
 
 		AsyncTask(ENamedThreads::GameThread, [=]() { SendMessageToGame(messageContent, messageAuthor); });
 	});
@@ -30,12 +43,6 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	bot->on_slashcommand([](auto event) {
 		if (event.command.get_command_name() == "ping") {
 			event.reply("Pong!");
-		}
-	});
-
-	bot->on_ready([&](auto event) {
-		if (dpp::run_once<struct register_bot_commands>()) {
-			bot->global_command_create(dpp::slashcommand("ping", "Ping pong!", bot->me.id));
 		}
 	});
 
