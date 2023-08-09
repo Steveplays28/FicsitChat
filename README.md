@@ -1,6 +1,6 @@
 # FICSIT.chat
 
-![icon](assets\ficsit_chat_icon_128x128.png)
+![icon](assets/ficsit_chat_icon_128x128.png)
 
 Satisfactory to Discord chat bridge mod with lots of configurability.
 
