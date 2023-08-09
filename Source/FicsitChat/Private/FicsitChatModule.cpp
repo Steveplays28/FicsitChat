@@ -41,8 +41,6 @@ void FFicsitChatModule::RegisterHooks() {
 			return;
 		}
 
-		UE_LOG(LogFicsitChat, Verbose, TEXT("Channel ID: %s"), *config.ChannelId);
-
 		dpp::embed embed =
 			dpp::embed().set_color(dpp::colors::orange).set_title(userName).set_description(message).set_footer(dpp::embed_footer().set_text("If you're tired, just remember you can buy a FICSIT™ Coffee Cup at the AWESOME Shop!"));
 

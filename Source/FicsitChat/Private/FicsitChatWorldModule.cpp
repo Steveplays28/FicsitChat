@@ -15,8 +15,6 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	// Get mod config
 	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
 
-	UE_LOG(LogFicsitChat, Verbose, TEXT("Bot token: %s"), *config.BotToken);
-
 	// Start Discord bot
 	bot = MakeShared<dpp::cluster>(TCHAR_TO_UTF8(*config.BotToken), dpp::i_default_intents | dpp::i_message_content);
 
