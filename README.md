@@ -51,6 +51,25 @@ To report bugs/crashes, or give suggestions, head over to the repository's [issu
 
 Visit the [Satisfactory modding documentation](https://docs.ficsit.app/satisfactory-modding/latest/Development/index.html) for information on how to set up the project for your IDE.
 
+## License
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a [copy of the GNU General Public License](LICENSE)
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## Attribution
+
+Icon created by Drew (xXdrewbaccaXx).
+
 ## Contact info
 
 If you want to say hi, head over to my [Discord server](https://discord.gg/KbWxgGg).  
