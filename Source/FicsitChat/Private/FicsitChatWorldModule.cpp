@@ -7,15 +7,30 @@ UFicsitChatWorldModule::UFicsitChatWorldModule() {
 #endif
 }
 
+void UFicsitChatWorldModule::BeginDestroy() {
+	Super::BeginDestroy();
+
+#if !WITH_EDITOR
+	UE_LOG(LogFicsitChat, Verbose, TEXT("BeginDestroy"));
+#endif
+}
+
 // Runs on game world load
 void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	if (Phase != ELifecyclePhase::INITIALIZATION)
 		return;
 
+	UE_LOG(LogFicsitChat, Verbose, TEXT("DispatchLifecycleEvent"));
+
 	// Get mod config
 	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
 
 	// Start Discord bot
+	if (!ValidateBotToken(*config.BotToken)) {
+		return;
+	}
+
+	UE_LOG(LogFicsitChat, Verbose, TEXT("Starting the Discord bot. If the game crashes due to FicsitChat or DPP, check if you have the right intents set (check on https://discord.com/developers), and check if your bot token is valid."));
 	bot = MakeShared<dpp::cluster>(TCHAR_TO_UTF8(*config.BotToken), dpp::i_default_intents | dpp::i_message_content);
 
 	bot->on_ready([&](auto event) {
@@ -45,6 +60,22 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	});
 
 	bot->start(true);
+}
+
+bool UFicsitChatWorldModule::ValidateBotToken(FString botToken) {
+	std::string botTokenString = TCHAR_TO_UTF8(*botToken);
+
+	if (botToken.Len() < 40 || botToken.Len() > 100) {
+		UE_LOG(LogFicsitChat, Verbose, TEXT("Failed to validate the Discord bot token. The Discord bot token's length needs to be in between 40 and 100 characters long."));
+		return false;
+	} else if (botTokenString.find(std::string("BOT_TOKEN_HERE")) != std::string::npos) {
+		UE_LOG(LogFicsitChat, Verbose,
+			   TEXT("Failed to validate the Discord bot token. The Discord bot token is set to the default value, which is invalid.\nPlease change it in the mod's configuration and reload your save. The Discord bot will not be started "
+					"until then."));
+		return false;
+	}
+
+	return true;
 }
 
 void UFicsitChatWorldModule::SendMessageToGame(FString messageContent, FString messageAuthor) {
