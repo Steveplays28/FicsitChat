@@ -23,7 +23,7 @@ void UFicsitChatWorldModule::DispatchLifecycleEvent(ELifecyclePhase Phase) {
 	UE_LOG(LogFicsitChat, Verbose, TEXT("DispatchLifecycleEvent"));
 
 	// Get mod config
-	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
+	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig(GetWorld());
 
 	// Start Discord bot
 	if (!ValidateBotToken(*config.BotToken)) {
@@ -79,7 +79,7 @@ bool UFicsitChatWorldModule::ValidateBotToken(FString botToken) {
 }
 
 void UFicsitChatWorldModule::SendMessageToGame(FString messageContent, FString messageAuthor) {
-	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
+	FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig(GetWorld());
 
 	FChatMessageStruct chatMessageStruct{};
 	chatMessageStruct.MessageString = messageContent;

@@ -13,41 +13,43 @@ public class FicsitChat : ModuleRules
 
 		// FactoryGame transitive dependencies
 		// Not all of these are required, but including the extra ones saves you from having to add them later.
-		PublicDependencyModuleNames.AddRange(new[] {
+		PublicDependencyModuleNames.AddRange(new string[] {
 			"Core", "CoreUObject",
 			"Engine",
 			"DeveloperSettings",
 			"PhysicsCore",
 			"InputCore",
-			"OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils",
-			"SignificanceManager",
+			//"OnlineSubsystem", "OnlineSubsystemUtils", "OnlineSubsystemNull",
+			//"SignificanceManager",
 			"GeometryCollectionEngine",
-			"ChaosVehiclesCore", "ChaosVehicles", "ChaosSolverEngine",
+			//"ChaosVehiclesCore", "ChaosVehicles", "ChaosSolverEngine",
 			"AnimGraphRuntime",
-			"AkAudio",
+			//"AkAudio",
 			"AssetRegistry",
 			"NavigationSystem",
-			"ReplicationGraph",
+			//"ReplicationGraph",
 			"AIModule",
 			"GameplayTasks",
 			"SlateCore", "Slate", "UMG",
-			"InstancedSplines",
+			//"InstancedSplines",
 			"RenderCore",
 			"CinematicCamera",
 			"Foliage",
-			"Niagara",
-			"EnhancedInput",
-			"GameplayCameras",
-			"TemplateSequence",
+			//"Niagara",
+			//"EnhancedInput",
+			//"GameplayCameras",
+			//"TemplateSequence",
 			"NetCore",
 			"GameplayTags",
+			"Json", "JsonUtilities",
+			"AssetRegistry"
 		});
 
 		// FactoryGame plugins
-		PublicDependencyModuleNames.AddRange(new[] {
-			"AbstractInstance",
-			"InstancedSplinesComponent",
-			"SignificanceISPC"
+		PublicDependencyModuleNames.AddRange(new string[] {
+			// "AbstractInstance",
+			// "InstancedSplinesComponent",
+			// "SignificanceISPC"
 		});
 
 		// Header stubs
@@ -55,15 +57,10 @@ public class FicsitChat : ModuleRules
 			"DummyHeaders",
 		});
 
-		if (Target.Type == TargetRules.TargetType.Editor)
-		{
-			PublicDependencyModuleNames.AddRange(new string[] { "OnlineBlueprintSupport", "AnimGraph" });
-		}
+		// if (Target.Type == TargetRules.TargetType.Editor)
+		// {
+		// 	PublicDependencyModuleNames.AddRange(new string[] { "OnlineBlueprintSupport", "AnimGraph" });
+		// }
 		PublicDependencyModuleNames.AddRange(new string[] { "FactoryGame", "SML", "DPPLibrary" });
-
-		// var platformName = Target.Platform.ToString();
-		// var binaryFolder = Path.Combine(ModuleDirectory, "../../Binaries", platformName);
-
-		// RuntimeDependencies.Add(binaryFolder);
 	}
 }

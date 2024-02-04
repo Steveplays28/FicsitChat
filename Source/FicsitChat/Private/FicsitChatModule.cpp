@@ -29,7 +29,7 @@ void FFicsitChatModule::RegisterHooks() {
 	SUBSCRIBE_METHOD_VIRTUAL_AFTER(AFGChatManager::Multicast_BroadcastChatMessage, afgChatManager, [](AFGChatManager *self, const FChatMessageStruct &newMessage) {
 		UE_LOG(LogFicsitChat, Verbose, TEXT("Chat message by %s sent to all clients: %s"), *newMessage.Sender->GetUserName(), *newMessage.MessageString);
 
-		FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig();
+		FFicsitChat_ConfigStruct config = FFicsitChat_ConfigStruct::GetActiveConfig((UFicsitChatWorldModule *)self->GetWorld());
 		UFicsitChatWorldModule *worldModule = (UFicsitChatWorldModule *)self->GetWorld()->GetSubsystem<UWorldModuleManager>()->FindModule(TEXT("FicsitChat"));
 
 		std::string userName = TCHAR_TO_UTF8(*newMessage.Sender->GetUserName());
